@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
 export type AetherHeroProps = {
   title?: string;
@@ -90,6 +91,7 @@ export default function AetherHero({
 }: AetherHeroProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const { user } = useAuth();
 
   const compileShader = (gl: WebGL2RenderingContext, src: string, type: number) => {
     const sh = gl.createShader(type)!;
@@ -254,9 +256,10 @@ export default function AetherHero({
             <div className="inline-flex gap-3 mt-8 flex-wrap">
               {ctaLabel && (
                 <a
-                  href={ctaHref}
+                  href={user ? undefined : ctaHref}
+                  onClick={user ? (e) => e.preventDefault() : undefined}
                   className="px-7 py-3 rounded-xl bg-gradient-to-b from-white/18 to-white/6 no-underline font-semibold text-base shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-md backdrop-saturate-[120%]"
-                  style={{ color: textColor }}
+                  style={{ color: textColor, cursor: user ? 'default' : 'pointer' }}
                 >
                   {ctaLabel}
                 </a>
