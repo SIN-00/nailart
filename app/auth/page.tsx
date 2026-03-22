@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
 /* ── Shader (right panel background) ───────────────────────── */
@@ -130,8 +131,13 @@ const FIXED_VIDEO_ID = 'mhVgh640FUw';
 /* ── Auth Page ──────────────────────────────────────────────── */
 export default function AuthPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, user } = useAuth();
+  const router = useRouter();
   useShaderCanvas(canvasRef);
+
+  useEffect(() => {
+    if (user) router.replace('/dashboard');
+  }, [user, router]);
 
   return (
     <div className="relative flex min-h-screen overflow-hidden">

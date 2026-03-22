@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Navbar() {
@@ -53,12 +53,10 @@ export default function Navbar() {
 
       {/* Right: CTA */}
       <a
-        href={user ? undefined : '/auth'}
-        onClick={user ? (e) => e.preventDefault() : undefined}
+        href={user ? '/dashboard' : '/auth'}
         className="px-5 py-2 rounded-[10px] bg-white/12 text-white no-underline text-sm font-semibold border border-white/18 backdrop-blur-md hover:bg-white/22 hover:border-white/35 transition-all duration-250"
-        style={{ cursor: user ? 'default' : 'pointer' }}
       >
-        Get Started
+        {user ? 'Dashboard' : 'Get Started'}
       </a>
     </nav>
   );

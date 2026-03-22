@@ -256,12 +256,11 @@ export default function AetherHero({
             <div className="inline-flex gap-3 mt-8 flex-wrap">
               {ctaLabel && (
                 <a
-                  href={user ? undefined : ctaHref}
-                  onClick={user ? (e) => e.preventDefault() : undefined}
+                  href={user ? '/dashboard' : ctaHref}
                   className="px-7 py-3 rounded-xl bg-gradient-to-b from-white/18 to-white/6 no-underline font-semibold text-base shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-md backdrop-saturate-[120%]"
-                  style={{ color: textColor, cursor: user ? 'default' : 'pointer' }}
+                  style={{ color: textColor }}
                 >
-                  {ctaLabel}
+                  {user ? 'Go to Dashboard' : ctaLabel}
                 </a>
               )}
               {secondaryCtaLabel && (
